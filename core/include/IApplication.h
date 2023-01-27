@@ -21,13 +21,21 @@ class IApplication {
 		inline int32_t GetWidth() const { return m_iWidth; }
 		inline int32_t GetHeight() const { return m_iHeight; }
 		inline HWND GetWindow() { return m_Window; }
+		inline bool IsActive() const { return m_bActive; }
+		
+		void SetActive(bool set);
+		static IApplication* GetApp() { return m_pApp; }
 	protected:
+		virtual bool OnEvent(UINT message, WPARAM wParam, LPARAM lParam);
+
 	private:
 		static HWND MakeWindow(int32_t width, int32_t height, const std::string &title);
+		static long WINAPI WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-		HWND			m_Window;
-		int32_t			m_iWidth;
-		int32_t			m_iHeight;
+		HWND					m_Window;
+		int32_t					m_iWidth;
+		int32_t					m_iHeight;
+		bool					m_bActive;
 
-
+		static IApplication*	m_pApp;
 };

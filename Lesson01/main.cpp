@@ -3,7 +3,7 @@
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR cmdLine, int cmdShow) {
 	auto app = std::make_unique<IApplication>();
 
-	if (!app->Create(1280, 720, "SUPERGAMGE")) {
+	if (!app->Create(1280, 720, "SUPERGAME")) {
 		// Something went wrong.
 		return 0;
 	}
