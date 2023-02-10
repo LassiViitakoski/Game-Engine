@@ -1,5 +1,7 @@
 #include "../include/IApplication.h"
 
+using namespace std;
+
 IApplication* IApplication::m_pApp = nullptr;
 
 IApplication::IApplication() :m_Window{ nullptr }, m_iWidth{ 0 }, m_iHeight{ 0 }, m_bActive{ false } {
@@ -12,10 +14,11 @@ IApplication::~IApplication() {
 
 void IApplication::SetActive(bool set) {
 	this->m_bActive = set;
+	this->m_Timer.BeginTimer();
 }
 
 bool IApplication::Create(int32_t resX, int32_t resY, const std::string& title) {
-	this->m_Window = MakeWindow(resX, resY, title);
+	this->m_Window = IApplication::MakeWindow(resX, resY, title);
 
 	if (!this->m_Window) {
 		return false;
@@ -23,9 +26,13 @@ bool IApplication::Create(int32_t resX, int32_t resY, const std::string& title) 
 
 	this->m_iWidth = resX;
 	this->m_iHeight = resY;
-	this->SetActive(true);
+
+	if (this->OnCreate()) {
+		this->SetActive(true);
+		return true;
+	}
 	
-	return true;
+	return false;
 }
 
 void IApplication::Run() {
@@ -47,10 +54,21 @@ void IApplication::Run() {
 		}
 
 		if (msg.message != WM_QUIT) {
-			::OutputDebugString(L"RUNNING!\n");
+			// ::OutputDebugString(L"RUNNING!\n");
 			// TODO : run our actual main loop
+			this->m_Timer.EndTimer();
+			this->m_Timer.BeginTimer();
+			this->OnUpdate(this->m_Timer.GetElapsedSeconds());
+			// this->OnDraw(*this->m_pRenderer);
+
+			//::Sleep(10);
+			// char buffer[512];
+			// sprintf_s(buffer, "FPS: %f\r\n", 1.0f / this->GetFrameTime());
+			// ::OutputDebugStringA(buffer);
 		}
 	}
+
+	this->OnDestroy();
 }
 
 bool IApplication::OnEvent(UINT message, WPARAM wParam, LPARAM lParam) {

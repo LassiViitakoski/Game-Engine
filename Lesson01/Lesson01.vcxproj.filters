@@ -30,10 +30,25 @@
     <ClCompile Include="..\core\src\IApplication.cpp">
       <Filter>core\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\core\src\Timer.cpp">
+      <Filter>core\src</Filter>
+    </ClCompile>
+    <ClCompile Include="TheApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\core\include\IApplication.h">
       <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\include\Timer.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\core\include\IRenderer.h">
+      <Filter>core\include</Filter>
+    </ClInclude>
+    <ClInclude Include="TheApp.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

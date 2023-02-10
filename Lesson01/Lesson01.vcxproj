@@ -129,10 +129,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\core\src\IApplication.cpp" />
+    <ClCompile Include="..\core\src\Timer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TheApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\core\include\IApplication.h" />
+    <ClInclude Include="..\core\include\IRenderer.h" />
+    <ClInclude Include="..\core\include\Timer.h" />
+    <ClInclude Include="TheApp.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
